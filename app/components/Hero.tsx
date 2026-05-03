@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -39,7 +40,6 @@ export default function Hero() {
         ? "rgba(232, 82, 74, 0.1)"
         : "rgba(244, 167, 167, 0.15)";
 
-      // Wick
       ctx.strokeStyle = wickColor;
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -47,10 +47,15 @@ export default function Hero() {
       ctx.lineTo(x + width / 2, low);
       ctx.stroke();
 
-      // Body
       ctx.fillStyle = color;
       ctx.beginPath();
-      ctx.roundRect(x, Math.min(open, close), width, Math.abs(close - open) || 2, 2);
+      ctx.roundRect(
+        x,
+        Math.min(open, close),
+        width,
+        Math.abs(close - open) || 2,
+        2
+      );
       ctx.fill();
     };
 
@@ -95,7 +100,6 @@ export default function Hero() {
       }
       ctx.stroke();
 
-      // Second MA line
       ctx.strokeStyle = "rgba(244, 167, 167, 0.15)";
       ctx.lineWidth = 1.5;
       ctx.beginPath();
@@ -136,7 +140,7 @@ export default function Hero() {
       <div className="absolute top-20 right-10 w-72 h-72 rounded-full bg-pink-pill/20 blur-3xl animate-float" />
       <div className="absolute bottom-20 left-10 w-96 h-96 rounded-full bg-coral/10 blur-3xl animate-float delay-200" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="animate-fade-in-left">
@@ -214,26 +218,77 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right – Mascot Placeholder */}
+          {/* Right – Mascot with wow animation */}
           <div className="hidden lg:flex justify-center items-center animate-fade-in-right">
-            <div className="relative">
-              {/* Decorative ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-dashed border-pink-pill/40 animate-spin" style={{ animationDuration: "20s" }} />
+            <div className="relative mascot-container">
+              {/* Outer glow ring - pulsing */}
+              <div className="absolute -inset-6 rounded-full bg-gradient-to-br from-coral/20 via-pink-pill/15 to-blush/20 blur-xl mascot-glow" />
 
-              {/* Mascot placeholder */}
-              <div className="w-80 h-80 xl:w-96 xl:h-96 rounded-full bg-white/60 backdrop-blur card-shadow flex items-center justify-center overflow-hidden">
-                {/* Replace this div with your mascot image */}
-                <div className="text-center p-8">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full gradient-coral flex items-center justify-center">
-                    <svg className="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-gray-body font-medium">
-                    Divya Special
-                  </p>
-                  <p className="text-xs text-pink-pill mt-1">Your Trading Mentor</p>
+              {/* Orbiting sparkles */}
+              <div className="absolute inset-0 mascot-orbit">
+                <div className="absolute -top-3 left-1/2 w-3 h-3 rounded-full bg-coral/60 blur-sm mascot-sparkle" />
+              </div>
+              <div
+                className="absolute inset-0 mascot-orbit"
+                style={{ animationDelay: "-2s", animationDuration: "7s" }}
+              >
+                <div className="absolute top-1/2 -right-3 w-2 h-2 rounded-full bg-pink-pill blur-sm mascot-sparkle" style={{ animationDelay: "-1s" }} />
+              </div>
+              <div
+                className="absolute inset-0 mascot-orbit"
+                style={{ animationDelay: "-4s", animationDuration: "9s" }}
+              >
+                <div className="absolute -bottom-2 left-1/3 w-2.5 h-2.5 rounded-full bg-rose-red/40 blur-sm mascot-sparkle" style={{ animationDelay: "-2s" }} />
+              </div>
+
+              {/* Decorative dashed ring */}
+              <div
+                className="absolute -inset-4 rounded-full border-2 border-dashed border-pink-pill/30"
+                style={{
+                  animation: "spin 25s linear infinite",
+                }}
+              />
+
+              {/* Inner ring accent */}
+              <div
+                className="absolute -inset-1 rounded-full border border-coral/10"
+                style={{
+                  animation: "spin 30s linear infinite reverse",
+                }}
+              />
+
+              {/* Mascot image with float + subtle 3D tilt */}
+              <div className="mascot-float relative">
+                <div className="w-72 h-80 xl:w-80 xl:h-[22rem] relative mascot-tilt">
+                  {/* Soft shadow beneath mascot */}
+                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-48 h-6 bg-charcoal/8 rounded-full blur-lg mascot-shadow" />
+
+                  <Image
+                    src="/mascot.png"
+                    alt="Divya Special - Your Trading Mentor"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    priority
+                    sizes="(max-width: 1024px) 0px, 320px"
+                  />
                 </div>
+              </div>
+
+              {/* Floating badge - bottom right */}
+              <div className="absolute -bottom-2 -right-4 bg-white/90 backdrop-blur-md rounded-2xl px-4 py-2.5 card-shadow mascot-badge-float">
+                <p className="text-xs font-bold text-coral">Divya Special</p>
+                <p className="text-[10px] text-gray-body">Your Trading Mentor</p>
+              </div>
+
+              {/* Floating badge - top left */}
+              <div
+                className="absolute -top-2 -left-6 bg-white/90 backdrop-blur-md rounded-2xl px-3 py-2 card-shadow mascot-badge-float"
+                style={{ animationDelay: "-1.5s" }}
+              >
+                <p className="text-[10px] font-bold text-coral flex items-center gap-1">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  Live Mentor
+                </p>
               </div>
             </div>
           </div>
@@ -243,8 +298,18 @@ export default function Hero() {
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
         <span className="text-xs text-gray-body font-medium">Scroll</span>
-        <svg className="w-5 h-5 text-coral" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        <svg
+          className="w-5 h-5 text-coral"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
         </svg>
       </div>
     </section>

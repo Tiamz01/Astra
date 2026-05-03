@@ -234,3 +234,89 @@ body {
   border: 3px solid transparent;
   border-image: linear-gradient(135deg, #E8524A, #F4A7A7, #E8524A) 1;
 }
+
+/* ── Mascot Animations ── */
+@keyframes mascotFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(0.5deg); }
+  50% { transform: translateY(-16px) rotate(-0.5deg); }
+  75% { transform: translateY(-8px) rotate(0.3deg); }
+}
+
+@keyframes mascotGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes mascotOrbit {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes mascotSparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+@keyframes mascotTilt {
+  0%, 100% { transform: perspective(800px) rotateY(0deg) rotateX(0deg); }
+  25% { transform: perspective(800px) rotateY(3deg) rotateX(-2deg); }
+  50% { transform: perspective(800px) rotateY(-2deg) rotateX(1deg); }
+  75% { transform: perspective(800px) rotateY(1deg) rotateX(-1deg); }
+}
+
+@keyframes mascotShadow {
+  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.08; }
+  50% { transform: translateX(-50%) scaleX(0.8); opacity: 0.04; }
+}
+
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.mascot-float {
+  animation: mascotFloat 5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.mascot-glow {
+  animation: mascotGlow 4s ease-in-out infinite;
+}
+
+.mascot-orbit {
+  animation: mascotOrbit 8s linear infinite;
+}
+
+.mascot-sparkle {
+  animation: mascotSparkle 2s ease-in-out infinite;
+}
+
+.mascot-tilt {
+  animation: mascotTilt 8s ease-in-out infinite;
+}
+
+.mascot-shadow {
+  animation: mascotShadow 5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.mascot-badge-float {
+  animation: badgeFloat 3s ease-in-out infinite;
+}
+
+.mascot-container {
+  transition: transform 0.3s ease;
+}
+
+.mascot-container:hover {
+  transform: scale(1.03);
+}
+
+.mascot-container:hover .mascot-tilt {
+  animation-play-state: paused;
+  transform: perspective(800px) rotateY(5deg) rotateX(-3deg);
+}
