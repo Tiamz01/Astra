@@ -86,7 +86,6 @@ export default function Hero() {
         drawCandle(x, open, close, high, low, candleWidth, bullish);
       }
 
-      // Moving average line
       ctx.strokeStyle = "rgba(232, 82, 74, 0.12)";
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -140,10 +139,10 @@ export default function Hero() {
       <div className="absolute top-20 right-10 w-72 h-72 rounded-full bg-pink-pill/20 blur-3xl animate-float" />
       <div className="absolute bottom-20 left-10 w-96 h-96 rounded-full bg-coral/10 blur-3xl animate-float delay-200" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 pb-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
-          <div className="animate-fade-in-left">
+          <div className="animate-fade-in-left text-center lg:text-left">
             {/* Pill badge */}
             <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur rounded-full px-4 py-2 card-shadow mb-6">
               <span className="w-2 h-2 rounded-full gradient-coral animate-pulse" />
@@ -152,14 +151,81 @@ export default function Hero() {
               </span>
             </div>
 
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-extrabold leading-none mb-4">
+            {/* ── Mobile/Tablet Mascot: appears between badge and title ── */}
+            <div className="lg:hidden flex justify-center mb-6">
+              <div className="relative mascot-container">
+                {/* Glow ring */}
+                <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-coral/15 via-pink-pill/10 to-blush/15 blur-xl mascot-glow" />
+
+                {/* Orbiting sparkles */}
+                <div className="absolute inset-0 mascot-orbit">
+                  <div className="absolute -top-2 left-1/2 w-2.5 h-2.5 rounded-full bg-coral/60 blur-sm mascot-sparkle" />
+                </div>
+                <div
+                  className="absolute inset-0 mascot-orbit"
+                  style={{ animationDelay: "-2s", animationDuration: "7s" }}
+                >
+                  <div className="absolute top-1/2 -right-2 w-2 h-2 rounded-full bg-pink-pill blur-sm mascot-sparkle" style={{ animationDelay: "-1s" }} />
+                </div>
+                <div
+                  className="absolute inset-0 mascot-orbit"
+                  style={{ animationDelay: "-4s", animationDuration: "9s" }}
+                >
+                  <div className="absolute -bottom-1 left-1/3 w-2 h-2 rounded-full bg-rose-red/40 blur-sm mascot-sparkle" style={{ animationDelay: "-2s" }} />
+                </div>
+
+                {/* Dashed ring */}
+                <div
+                  className="absolute -inset-3 rounded-full border-2 border-dashed border-pink-pill/25"
+                  style={{ animation: "spin 25s linear infinite" }}
+                />
+
+                {/* Mascot image with float */}
+                <div className="mascot-float relative">
+                  <div className="relative mascot-tilt">
+                    {/* Container: small on mobile, bigger on tablet */}
+                    <div className="w-44 h-52 sm:w-56 sm:h-64 md:w-64 md:h-72 relative">
+                      {/* Shadow */}
+                      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-32 sm:w-40 h-4 bg-charcoal/6 rounded-full blur-lg mascot-shadow" />
+                      <Image
+                        src="/mascot.png"
+                        alt="Divya Special - Your Trading Mentor"
+                        fill
+                        className="object-contain drop-shadow-2xl"
+                        priority
+                        sizes="(max-width: 640px) 176px, (max-width: 768px) 224px, 256px"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating badge - right */}
+                <div className="absolute -bottom-1 -right-3 sm:-right-6 bg-white/90 backdrop-blur-md rounded-xl sm:rounded-2xl px-3 py-1.5 sm:px-4 sm:py-2 card-shadow mascot-badge-float z-20">
+                  <p className="text-[10px] sm:text-xs font-bold text-coral">Divya Special</p>
+                  <p className="text-[8px] sm:text-[10px] text-gray-body">Your Trading Mentor</p>
+                </div>
+
+                {/* Floating badge - left */}
+                <div
+                  className="absolute -top-1 -left-2 sm:-left-5 bg-white/90 backdrop-blur-md rounded-xl sm:rounded-2xl px-2.5 py-1.5 sm:px-3 sm:py-2 card-shadow mascot-badge-float z-20"
+                  style={{ animationDelay: "-1.5s" }}
+                >
+                  <p className="text-[8px] sm:text-[10px] font-bold text-coral flex items-center gap-1">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                    Live Mentor
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-none mb-4">
               <span className="gradient-coral-text">Astra</span>
             </h1>
 
-            <p className="text-xl sm:text-2xl font-semibold text-charcoal mb-2">
+            <p className="text-lg sm:text-xl lg:text-2xl font-semibold text-charcoal mb-2">
               A 3-Month Intensive Mentorship
             </p>
-            <p className="text-lg text-gray-body mb-8 max-w-lg">
+            <p className="text-base sm:text-lg text-gray-body mb-8 max-w-lg mx-auto lg:mx-0">
               Master <span className="font-semibold text-coral">Forex</span> &{" "}
               <span className="font-semibold text-coral">
                 Synthetic Indices Trading
@@ -168,13 +234,13 @@ export default function Hero() {
               community.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
               <a
                 href="https://t.me/astra_waitlist"
                 target="_blank"
                 rel="noopener noreferrer"
                 id="hero-cta"
-                className="gradient-coral text-white font-semibold px-8 py-4 rounded-full btn-glow text-base inline-flex items-center gap-2"
+                className="gradient-coral text-white font-semibold px-7 sm:px-8 py-3.5 sm:py-4 rounded-full btn-glow text-sm sm:text-base inline-flex items-center gap-2"
               >
                 <span>Join the Waitlist</span>
                 <svg
@@ -193,21 +259,21 @@ export default function Hero() {
               </a>
               <a
                 href="#about"
-                className="bg-white/80 backdrop-blur text-charcoal font-semibold px-8 py-4 rounded-full card-shadow hover:card-shadow-hover transition-all duration-300 text-base"
+                className="bg-white/80 backdrop-blur text-charcoal font-semibold px-7 sm:px-8 py-3.5 sm:py-4 rounded-full card-shadow hover:card-shadow-hover transition-all duration-300 text-sm sm:text-base"
               >
                 Learn More
               </a>
             </div>
 
             {/* Stats */}
-            <div className="flex gap-8 mt-10">
+            <div className="flex gap-8 mt-10 justify-center lg:justify-start">
               {[
                 { value: "6", label: "Modules" },
                 { value: "3", label: "Months" },
                 { value: "$100", label: "Investment" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <div className="text-2xl font-bold gradient-coral-text">
+                  <div className="text-xl sm:text-2xl font-bold gradient-coral-text">
                     {stat.value}
                   </div>
                   <div className="text-xs text-gray-body mt-1 font-medium">
@@ -218,10 +284,10 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right – Mascot with wow animation */}
+          {/* ── Desktop Mascot (lg+) ── */}
           <div className="hidden lg:flex justify-center items-center animate-fade-in-right">
             <div className="relative mascot-container">
-              {/* Outer glow ring - pulsing */}
+              {/* Outer glow ring */}
               <div className="absolute -inset-6 rounded-full bg-gradient-to-br from-coral/20 via-pink-pill/15 to-blush/20 blur-xl mascot-glow" />
 
               {/* Orbiting sparkles */}
@@ -244,32 +310,26 @@ export default function Hero() {
               {/* Decorative dashed ring */}
               <div
                 className="absolute -inset-4 rounded-full border-2 border-dashed border-pink-pill/30"
-                style={{
-                  animation: "spin 25s linear infinite",
-                }}
+                style={{ animation: "spin 25s linear infinite" }}
               />
 
               {/* Inner ring accent */}
               <div
                 className="absolute -inset-1 rounded-full border border-coral/10"
-                style={{
-                  animation: "spin 30s linear infinite reverse",
-                }}
+                style={{ animation: "spin 30s linear infinite reverse" }}
               />
 
-              {/* Mascot image with float + subtle 3D tilt */}
+              {/* Mascot image */}
               <div className="mascot-float relative">
                 <div className="w-72 h-80 xl:w-80 xl:h-[22rem] relative mascot-tilt">
-                  {/* Soft shadow beneath mascot */}
                   <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-48 h-6 bg-charcoal/8 rounded-full blur-lg mascot-shadow" />
-
                   <Image
                     src="/mascot.png"
                     alt="Divya Special - Your Trading Mentor"
                     fill
                     className="object-contain drop-shadow-2xl"
                     priority
-                    sizes="(max-width: 1024px) 0px, 320px"
+                    sizes="(max-width: 1280px) 288px, 320px"
                   />
                 </div>
               </div>
@@ -296,7 +356,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
         <span className="text-xs text-gray-body font-medium">Scroll</span>
         <svg
           className="w-5 h-5 text-coral"
